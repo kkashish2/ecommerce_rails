@@ -1,0 +1,176 @@
+<style>
+  /* Global Styles */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    color: #495057;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-top: 40px;
+  }
+
+  h2 strong {
+    color: #e74c3c;
+  }
+
+  /* Card Styling */
+  .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-body {
+    padding: 30px;
+  }
+
+  .card-title {
+    font-size: 1.75rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .card-subtitle {
+    color: #7f8c8d;
+    font-size: 1.15rem;
+    margin-bottom: 20px;
+  }
+
+  .card-text {
+    color: #7f8c8d;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .card-link {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 20px;
+  }
+
+  .card-link:hover {
+    text-decoration: underline;
+    color: #e74c3c;
+  }
+
+  /* Product Container */
+  .product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .product {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .product:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  .product-name {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .product-info, .product-description {
+    color: #7f8c8d;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .product-info strong, .product-description strong {
+    color: #2c3e50;
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .product-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card {
+      width: 90%;
+    }
+
+    .product {
+      width: 80%;
+    }
+  }
+
+  /* Hover and Focus Effects */
+  .product:focus, .product:hover {
+    outline: none;
+    border-color: #e74c3c;
+  }
+
+  /* Animations */
+  .card, .product {
+    transition: all 0.3s ease-in-out;
+  }
+</style>
+
+
+<!-- Page Content -->
+<br><br><br><br><br>
+
+<div class="text-center">
+  <h2>Discover Our Latest <strong>Products</strong></h2>
+  <p style="font-size: 1.2rem; color: #7f8c8d;">Explore exclusive items from Ruby Walmart, your go-to e-commerce destination.</p>
+</div>
+
+<br>
+
+<!-- Introduction Card -->
+<div class="card custom-margin-left" style="width: 32rem;">
+  <div class="card-body">
+    <h5 class="card-title">Welcome to Ruby Walmart E-Commerce!</h5>
+    <h6 class="card-subtitle mb-2 text-muted">A modern shopping experience built with Ruby on Rails</h6>
+    <p class="card-text">Ruby Walmart is the ultimate place for you to shop premium products across categories. Whether you're looking for electronics, fashion, or home goods, we have it all, made easy for you.</p>
+
+  </div>
+</div>
+
+<!-- Products Section -->
+<div class="product-container">
+  <% @products.each do |product| %>
+    <div class="product" id="product-<%= product.id %>" onclick="window.location.href='<%= product_path(product) %>';">
+      <p class="product-name fs-5"><strong><%= product.name %> </strong></p>
+      <p class="product-info"><strong>Price: <%= number_to_currency(product.price, unit: 'R$', separator: ',', delimiter: '.') %> </strong></p>
+      <p class="product-description"><strong>Description: </strong><%= truncate(product.description, length: 100) %></p>
+    </div>
+  <% end %>
+</div>
